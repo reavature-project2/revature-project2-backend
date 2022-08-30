@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-// @CrossOrigin(origins = "http://localhost:5000", allowedHeaders = "*")
+// Security risk
+//@CrossOrigin(origins = "http://localhost:5000", allowedHeaders = "*")
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/register")
 public class RegisterController {
     private UserService userService;
@@ -32,9 +33,6 @@ public class RegisterController {
 //    Methods
     @PostMapping
     public ResponseEntity<User> addUser(@Valid @RequestBody UserDTO userDto, HttpServletResponse response) {
-        System.out.println("\n\n");
-        System.out.println(userDto);
-        System.out.println("\n\n");
         User user = modelMapper.map(userDto, User.class);
         User existingEmail = userService.getByEmail(user.getEmail());
         User existingDrLicense = userService.getByDrLicense(user.getDr_lic_number());
@@ -42,11 +40,12 @@ public class RegisterController {
         if(existingEmail != null) {
             response.addHeader("error_message", "This email is already in use.");
             response.setStatus(409);
-            return null;
+//            return null;
+            return ResponseEntity.ok(new User());
         }
         if(existingDrLicense != null) {
             response.addHeader("error_message", "This driver license number is already in use.");
-            response.setStatus(410);
+            response.setStatus(409);
             return null;
         }
 
