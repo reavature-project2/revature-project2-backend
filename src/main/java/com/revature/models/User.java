@@ -1,5 +1,6 @@
 package com.revature.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
@@ -60,6 +61,7 @@ public class User {
 
 //    One-to-Many relationship
     @OneToMany(mappedBy = "user_id", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Order> orders;
 
 //    Constructors

@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+// Security risk
+//@CrossOrigin(origins = "http://localhost:5000", allowedHeaders = "*")
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/login")
 public class LoginController {
     private UserService userService;

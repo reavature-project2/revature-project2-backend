@@ -1,7 +1,6 @@
 package com.revature.services;
 
 import com.revature.dto.Credentials;
-import com.revature.exceptions.UserCredentialsAlreadyInUse;
 import com.revature.models.User;
 import com.revature.repositores.OrderRepo;
 import com.revature.repositores.UserRepo;
@@ -9,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
@@ -46,6 +44,12 @@ public class UserService {
     public User addUser(User newUser) {
         Optional<User> addedUser = userRepo.addUser(newUser.getAge(), newUser.getDr_lic_number(), newUser.getEmail(),
                 newUser.getF_name(), newUser.getL_name(), newUser.getPass());
+        return addedUser.orElse(null);
+    }
+
+    @Transactional
+    public User updateUser(String userPassword, int userID, String userName) {
+        Optional<User> addedUser = userRepo.updateUser(userPassword, userID, userName);
         return addedUser.orElse(null);
     }
 

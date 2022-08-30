@@ -27,4 +27,7 @@ public interface UserRepo extends JpaRepository<User, Integer> {
 
     @Query(value = "select * from users where dr_lic_number like ?", nativeQuery = true)
     Optional<User> getByDrLicense(String userDrLicense);
+
+    @Query(value = "update users set pass = ? where user_id = ? and email like ? returning *", nativeQuery = true)
+    Optional<User> updateUser(String userPassword, int userID, String userName);
 }
