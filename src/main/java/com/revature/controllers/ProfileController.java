@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5000", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RequestMapping("/profile")
 public class ProfileController {
     private UserService userService;
