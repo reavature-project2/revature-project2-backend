@@ -64,6 +64,10 @@ public class User {
     @JsonBackReference
     private List<Order> orders;
 
+    @OneToMany(mappedBy = "user_id", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private List<Message> messages;
+
 //    Constructors
     @Autowired
     public User(String f_name, String l_name, String email, int age, String dr_lic_number, String pass,
