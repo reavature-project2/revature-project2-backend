@@ -38,7 +38,7 @@ public class Message {
     private String l_name;
 
     @Email
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     @Length(min = 3)
     private String email;
 
